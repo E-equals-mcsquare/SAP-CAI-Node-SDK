@@ -14,7 +14,7 @@ var FormMessages = require('./formMessages');
 var formMessages = new FormMessages();
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -51,7 +51,7 @@ app.get('/SampleGetExternalServer', async function (req, res) {
         productsList = productsList + allProducts[i].ID + "\n" + allProducts[i].Name + "\n\n";
     }
 
-    res.send(formMessages.textResponseSingle(productsList,''));
+    res.send(setTextResponseSingle(productsList,''));
     */
 
     /**
@@ -67,27 +67,27 @@ app.get('/SampleGetExternalServer', async function (req, res) {
         });
     }
 
-    res.send(formTextResponseMultiple(replies, ''));
+    res.send(setTextResponseMultiple(replies, ''));
 
 });
 
-function formTextResponseSingle(text, memory) {
+function setTextResponseSingle(text, memory) {
     return formMessages.textResponseSingle(text, memory);
 }
 
-function formTextResponseMultiple(repliesArray, memory) {
+function setTextResponseMultiple(repliesArray, memory) {
     return formMessages.textResponseMultiple(repliesArray, memory);
 }
 
-function formImageResponse(imageUrl, memory) {
+function setImageResponse(imageUrl, memory) {
     return formMessages.image(imageUrl, memory);
 }
 
-function formButtonResponse(title, buttons, memory) {
+function setButtonResponse(title, buttons, memory) {
     return formMessages.buttonReplies(title, buttons, memory);
 }
 
-function formQuickRepliesResponse(title, buttons, memory) {
+function setQuickRepliesResponse(title, buttons, memory) {
     return formMessages.quickReplies(title, buttons, memory);
 }
 
